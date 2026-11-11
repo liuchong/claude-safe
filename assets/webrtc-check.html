@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>WebRTC 本机检查</title>
+<style>body{font:16px system-ui;max-width:58rem;margin:3rem auto;padding:0 1rem;line-height:1.7}button{padding:.6rem 1rem}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#eee;padding:1rem}</style>
+<h1>WebRTC 本机检查</h1><p>点击后通过 STUN 检查本浏览器的候选地址。服务器：stun.l.google.com:19302。结果只留在此页面，不保存、不上传；刷新即清空。私网或 mDNS 地址不等于公网绕行。</p>
+<button id="start">开始检查</button><pre id="result" aria-live="polite">尚未检查</pre>
+<script>
+const button=document.getElementById('start'), output=document.getElementById('result');
+button.onclick=async()=>{
+ button.disabled=true; output.textContent='正在检查，最多 8 秒。\n';
+ let pc, timer;
+ const finish=()=>{clearTimeout(timer);if(pc)pc.close();button.disabled=false;};
+ try{
+  pc=new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+  timer=setTimeout(()=>{output.textContent+='检查结束。没有候选不能证明无泄漏。\n';finish();},8000);
+  pc.onicecandidate=event=>{if(!event.candidate)return;const c=event.candidate;
+   output.textContent+=JSON.stringify({type:c.type,address:c.address,protocol:c.protocol})+'\n';};
+  pc.createDataChannel('probe');await pc.setLocalDescription(await pc.createOffer());
+ }catch(error){output.textContent+='浏览器不能完成检查：'+error.name;finish();}
+};
+</script></html>

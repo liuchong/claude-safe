@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "endpoint_ipv4": "REPLACE_WITH_AUTHORIZED_PUBLIC_IPV4",
+  "port": 51820,
+  "egress_interface": "REPLACE_WITH_SERVER_DEFAULT_INTERFACE",
+  "server_private_key_file": "./server.key",
+  "server_public_key_file": "./server.pub",
+  "client_private_key_file": "./client.key",
+  "client_public_key_file": "./client.pub",
+  "server_cidr": "10.77.0.1/24",
+  "client_cidr": "10.77.0.2/32",
+  "dns_ipv4": "1.1.1.1",
+  "mtu": 1380
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Claude Safe"
+  short_description: "尽量无人值守地配置并逐项验证 Claude 环境，保留既有分流、秘密与恢复能力，不只给方案"
+  default_prompt: "使用 $claude-safe，自动发现并配置当前已授权电脑的 Claude 环境，连续完成可执行步骤与实际验收，只将真正需要本人完成的操作一次汇总给我。"
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,25 @@
+{
+  "mode": "configure",
+  "target": "current-authorized-computer",
+  "products": ["claude-code"],
+  "network": {
+    "reuse_existing": true,
+    "fixed_exit": true,
+    "fail_closed": true,
+    "preserve_other_products": true
+  },
+  "permissions": {
+    "reversible_user_config": true,
+    "install_official_software": false,
+    "system_changes": false,
+    "delete_credentials_or_history": false
+  },
+  "purchases": {
+    "max_total": 0,
+    "currency": "USD",
+    "provider": null,
+    "auto_renew": false
+  },
+  "timezone": "preserve",
+  "credentials": "Use existing authorized secure stores; do not put secrets in this file."
+}
